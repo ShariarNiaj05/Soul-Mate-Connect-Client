@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
@@ -17,3 +18,10 @@ const Theme = ({ children }) => {
 };
 
 export default Theme;
+
+ 
+ 
+Theme.propTypes = {
+ 
+  children: PropTypes.any, 
+};

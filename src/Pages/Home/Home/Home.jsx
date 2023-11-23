@@ -1,11 +1,12 @@
-import { Button } from "@mui/material";
+import Banner from "../Banner/Banner";
+import HowWorks from "../HowWorks/HowWorks";
 
 const Home = () => {
   return (
     <div>
-      <Button variant="contained">Contained</Button>
-      <p>I am available from Home </p>
-      sfaddddddd
+      <Banner></Banner>
+      {/* have to add premium member  */}
+      <HowWorks></HowWorks>
     </div>
   );
 };

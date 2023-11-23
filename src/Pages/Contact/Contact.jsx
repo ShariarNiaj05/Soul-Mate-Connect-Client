@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
  
-const Contact = ({props}) => {
+const Contact = () => {
  return (
     <div> 
          I am available from Contact 

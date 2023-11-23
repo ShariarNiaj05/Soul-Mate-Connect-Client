@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
  
-const About = ({props}) => {
+const About = () => {
  return (
     <div> 
          I am available from About 
