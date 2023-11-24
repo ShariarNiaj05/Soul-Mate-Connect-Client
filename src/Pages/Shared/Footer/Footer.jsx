@@ -1,10 +1,13 @@
+import { Grid, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
  
 const Footer = ({props}) => {
  return (
-    <div> 
-         I am available from Footer 
-    </div>
+    <Grid>
+       <Grid sx={{background: '#142959', py: 3 }}>
+          <Typography align='center' color={'white'}>All Rights Reserved Soul Mate Connect</Typography>
+       </Grid>
+    </Grid>
  )
 }
  

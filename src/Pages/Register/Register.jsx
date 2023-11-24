@@ -1,14 +1,18 @@
 import { Container } from "@mui/material";
 import PropTypes from "prop-types";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { imageUpload } from "../../API/imageUpload";
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
-  const navigate = useNavigate();
-  const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
+    const location = useLocation()
+
+    const axiosPublic = useAxiosPublic();
+    
+    const from = location.state?.from?.pathname || '/'
   const handleSignin = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -43,10 +47,17 @@ const Register = () => {
             }
           });
         });
-        navigate("/");
+        navigate(from, {replace: true});
       })
       .catch((error) => {
-        console.log(error);
+          console.log(error);
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "Registration failed",
+            showConfirmButton: false,
+            timer: 1500,
+          });
       });
 
     console.log(userInfo);

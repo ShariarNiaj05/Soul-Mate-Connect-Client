@@ -7,6 +7,9 @@ import Biodatas from "../Pages/Biodatas/Biodatas";
 import BiodataDetails from "../Pages/Biodatas/BiodataDetails";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import PrivateRoutes from "./PrivateRoutes";
+import DashboardLayout from "../Layout/DashboardLayout";
+import EditBiodata from "../Pages/Dashboard/EditBiodata/EditBiodata";
 
 const router = createBrowserRouter([
   {
@@ -24,30 +27,47 @@ const router = createBrowserRouter([
       },
       {
         path: "biodatas",
-        element: <Biodatas></Biodatas>
+        element: <Biodatas></Biodatas>,
       },
       {
         path: "biodata-details/:id",
-        element: <BiodataDetails></BiodataDetails>
+        element: (
+          <PrivateRoutes>
+            <BiodataDetails></BiodataDetails>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "about",
-        element: <About></About>
+        element: <About></About>,
       },
       {
         path: "contact",
-        element: <Contact></Contact>
+        element: <Contact></Contact>,
       },
     ],
-    
   },
   {
     path: "/login",
-    element: <Login></Login>
+    element: <Login></Login>,
   },
   {
     path: "/register",
-    element: <Register></Register>
+    element: <Register></Register>,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoutes>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoutes>
+    ),
+    children: [
+      {
+        path: "edit-biodata",
+        element: <EditBiodata></EditBiodata>,
+      },
+    ],
   },
 ]);
 
