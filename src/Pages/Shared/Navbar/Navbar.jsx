@@ -16,11 +16,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link, NavLink } from "react-router-dom";
 import { Container } from "@mui/material";
+import useAuth from "../../../Hooks/useAuth";
 
 const drawerWidth = 240;
 const navItems = ["home", "biodatas", "about", "contact"];
 
 function Navbar(props) {
+  const { user, loading, logOut } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -57,6 +59,13 @@ function Navbar(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
+    const handleLogOut = () => {
+      console.log('clicked');
+      logOut()
+    }
+  if (loading) {
+    return <p>loading..........</p>;
+  }
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -94,18 +103,29 @@ function Navbar(props) {
                   </NavLink>
                 </Button>
               ))}
-              <Link to="/login">
-                <Button variant="contained" color="secondary">
-                  {" "}
-                  Login
+
+              {user ? (
+                <Button
+                  onClick={handleLogOut}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Logout
                 </Button>
-              </Link>
-              <Link to="/dashboard">
-                <Button variant="contained" color="secondary">
-                  {" "}
-                  Dashboard
-                </Button>
-              </Link>
+              ) : (
+                <Link to="/login">
+                  <Button variant="contained" color="secondary">
+                    Login
+                  </Button>
+                </Link>
+              )}
+              {user && (
+                <Link to="/dashboard">
+                  <Button variant="contained" color="secondary">
+                    Dashboard
+                  </Button>
+                </Link>
+              )}
             </Box>
           </Toolbar>
         </Container>
@@ -132,7 +152,6 @@ function Navbar(props) {
       </nav>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        
       </Box>
     </Box>
   );
