@@ -10,6 +10,7 @@ import Register from "../Pages/Register/Register";
 import PrivateRoutes from "./PrivateRoutes";
 import DashboardLayout from "../Layout/DashboardLayout";
 import EditBiodata from "../Pages/Dashboard/EditBiodata/EditBiodata";
+import ViewBiodata from "../Pages/Dashboard/ViewBiodata/ViewBiodata";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "edit-biodata",
         element: <EditBiodata></EditBiodata>,
+      },
+      {
+        path: "view-biodata",
+        element: <ViewBiodata></ViewBiodata>,
       },
     ],
   },
