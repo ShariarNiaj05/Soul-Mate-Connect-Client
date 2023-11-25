@@ -4,10 +4,13 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import useBiodata from "../../Hooks/useBiodata";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const BiodataDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
+  const { user } = useAuth();
 
   // details biodata
   const { data: biodataDetails = {}, isLoading: biodataDetailsLoading } =
@@ -27,8 +30,34 @@ const BiodataDetails = () => {
       similarBiodata.biodataType === biodataDetails.biodataType
   );
 
-  console.log(similarBiodata);
-  //   console.log(biodataDetails);
+  const handleAddToFavourite = async () => {
+    const favouritesBiodataInfo = {
+      email: user?.email,
+      biodataId: biodataDetails.biodataId,
+      personName: biodataDetails.name,
+      permanentAddress: biodataDetails.permanentDivision,
+      PersonOccupation: biodataDetails.occupation,
+    };
+    console.log(favouritesBiodataInfo);
+
+
+    const res = await axiosSecure.post('/favourites', favouritesBiodataInfo)
+    if (res.data.insertedId) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Biodata added to favourites collection",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  };
+
+
+  if (biodataDetailsLoading) {
+    return <p>loading...................</p>;
+  }
+  // console.log(biodatas);
   return (
     <div className=" flex flex-col lg:flex-row gap-5">
       <div className=" flex-1 p-3">
@@ -60,7 +89,9 @@ const BiodataDetails = () => {
             <p>email: {biodataDetails.email}</p>
             <p>mobileNumber: {biodataDetails.mobileNumber}</p>
             <div className="">
-              <Button variant="contained">Add to Favourites</Button>
+              <Button onClick={handleAddToFavourite} variant="contained">
+                Add to Favourites
+              </Button>
             </div>
           </div>
         </div>
@@ -76,18 +107,16 @@ details biodata gender is male then show the male biodata .
               className="w-96 bg-base-100 shadow-xl"
             >
               <figure>
-                <img
-                  src={singleSimilarBiodata.profileImage}
-                  
-                />
+                <img src={singleSimilarBiodata.profileImage} />
               </figure>
               <div className="">
-                      <h2 className="">Biodata Id: { singleSimilarBiodata.biodataId}</h2>
-                      <p>occupation: { singleSimilarBiodata.occupation}</p>
-                      <p>age: { singleSimilarBiodata.age}</p>
-                      <p>dateOfBirth: { singleSimilarBiodata.dateOfBirth}</p>
-                      <p>height: { singleSimilarBiodata.height}</p>
-               
+                <h2 className="">
+                  Biodata Id: {singleSimilarBiodata.biodataId}
+                </h2>
+                <p>occupation: {singleSimilarBiodata.occupation}</p>
+                <p>age: {singleSimilarBiodata.age}</p>
+                <p>dateOfBirth: {singleSimilarBiodata.dateOfBirth}</p>
+                <p>height: {singleSimilarBiodata.height}</p>
               </div>
             </div>
           ))}
