@@ -5,6 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { imageUpload } from "../../API/imageUpload";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
     const navigate = useNavigate();
@@ -141,6 +142,7 @@ const Register = () => {
             </Link>
           </p>
         </form>
+        <SocialLogin></SocialLogin>
       </div>
     </Container>
   );

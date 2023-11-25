@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Login = () => {
     const { signIn } = useAuth();
@@ -115,6 +116,7 @@ const Login = () => {
             </Link>
           </p>
         </form>
+        <SocialLogin></SocialLogin>
       </div>
     </Container>
   );
