@@ -18,6 +18,8 @@ import { Link, NavLink } from "react-router-dom";
 import { Container } from "@mui/material";
 import useAuth from "../../../Hooks/useAuth";
 import logo from "/logo.png";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const drawerWidth = 240;
 const navItems = ["home", "biodatas", "about", "contact"];
@@ -26,6 +28,22 @@ function Navbar(props) {
   const { user, loading, logOut } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const axiosSecure = useAxiosSecure()
+
+  const { data: userRole, isLoading } = useQuery({
+    enabled: !!user?.email,
+    queryKey: ['user-role', user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/${user?.email}`)
+      
+      return res?.data?.role
+    }
+  })
+
+  if (isLoading || loading) {
+  return <p>loading..............</p>
+}
+console.log(userRole);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -64,9 +82,7 @@ function Navbar(props) {
     console.log("clicked");
     logOut();
   };
-  if (loading) {
-    return <p>loading..........</p>;
-  }
+ 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
