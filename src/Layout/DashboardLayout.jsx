@@ -1,7 +1,8 @@
-import { Button, Container } from "@mui/material";
+import { Box, Button, Container } from "@mui/material";
 import PropTypes from "prop-types";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import logo from "/logo.png";
 
 const DashboardLayout = () => {
   const { user, logOut } = useAuth();
@@ -37,9 +38,7 @@ const DashboardLayout = () => {
                     </NavLink>
                   </Button>
                   <Button variant="contained">
-                    <NavLink to={"/dashboard/got-married"}>
-                    Got Married
-                    </NavLink>
+                    <NavLink to={"/dashboard/got-married"}>Got Married</NavLink>
                   </Button>
                 </div>
               }
@@ -73,9 +72,19 @@ const DashboardLayout = () => {
             </div>
 
             {/* shared nav links  */}
-            <Button onClick={() => logOut()} variant="contained">
-              logout
-            </Button>
+            <div className=" flex flex-col">
+              <Link to={"/"}>
+                <Box
+                  component="img"
+                  sx={{ height: 100 }}
+                  alt="Logo"
+                  src={logo}
+                />
+              </Link>
+              <Button onClick={() => logOut()} variant="contained">
+                logout
+              </Button>
+            </div>
           </div>
         </div>
         <div className=" flex-1 p-8">

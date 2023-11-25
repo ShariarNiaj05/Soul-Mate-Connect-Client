@@ -17,6 +17,7 @@ import Button from "@mui/material/Button";
 import { Link, NavLink } from "react-router-dom";
 import { Container } from "@mui/material";
 import useAuth from "../../../Hooks/useAuth";
+import logo from "/logo.png";
 
 const drawerWidth = 240;
 const navItems = ["home", "biodatas", "about", "contact"];
@@ -59,10 +60,10 @@ function Navbar(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-    const handleLogOut = () => {
-      console.log('clicked');
-      logOut()
-    }
+  const handleLogOut = () => {
+    console.log("clicked");
+    logOut();
+  };
   if (loading) {
     return <p>loading..........</p>;
   }
@@ -81,13 +82,23 @@ function Navbar(props) {
             >
               <MenuIcon />
             </IconButton>
+
             <Typography
               variant="h4 "
               component="div"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              Soul Mate Connect
+              {/* Soul Mate Connect */}
+              <Link to={'/'}>
+                <Box
+                  component="img"
+                  sx={{ height: 100 }}
+                  alt="Logo"
+                  src={logo}
+                />
+              </Link>
             </Typography>
+
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItems.map((item) => (
                 <Button key={item} sx={{ color: "#fff" }}>
