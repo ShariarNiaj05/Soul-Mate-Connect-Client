@@ -38,7 +38,7 @@ const ApprovedContactRequest = () => {
   return (
     <table>
       <Typography align="center" variant="h3" color={"primary"}>
-        Edit or Create Your Biodata
+        Approve Contact Request
       </Typography>
       <thead className=" flex justify-center mt-10">
         <tr className=" flex justify-between gap-5 text-center">

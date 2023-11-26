@@ -131,7 +131,7 @@ const CheckOutForm = ({ requestedBiodataId }) => {
             timer: 1500,
           });
 
-          //   navigate('/dashboard/payment-history')
+            navigate('/dashboard/contact-request')
         }
       }
     }

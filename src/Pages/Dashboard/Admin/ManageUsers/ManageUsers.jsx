@@ -73,7 +73,7 @@ const ManageUsers = () => {
   return (
     <table>
       <Typography align="center" variant="h3" color={"primary"}>
-        Edit or Create Your Biodata
+        Manage Users
       </Typography>
       <input
         onChange={handleSearch}
