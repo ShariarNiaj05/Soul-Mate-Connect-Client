@@ -15,7 +15,7 @@ const ApprovedPremium = () => {
      </tr>
    </thead>
    <tbody className=" flex justify-center mt-5">
-     {/* table data row  */}
+    
      <div>
        <tr className=" flex justify-between gap-5 text-center mb-10">
          <td>{"singleFavouriteBiodata.personName"}</td>

@@ -91,7 +91,7 @@ const ManageUsers = () => {
         </tr>
       </thead>
       <tbody className=" flex flex-col items-center justify-center mt-5">
-        {/* table data row  */}
+       
         {users?.map((user) => (
           <tr
             key={user._id}

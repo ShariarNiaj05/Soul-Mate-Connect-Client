@@ -64,7 +64,7 @@ const FavouritesBiodata = () => {
           </tr>
         </thead>
         <tbody className=" flex justify-center mt-5">
-          {/* table data row  */}
+   
           <div>
             {favouritesBiodata.map((singleFavouriteBiodata) => (
               <tr
