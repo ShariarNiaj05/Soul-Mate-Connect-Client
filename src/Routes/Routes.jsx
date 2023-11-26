@@ -15,6 +15,7 @@ import FavouritesBiodata from "../Pages/Dashboard/FavouritesBiodata/FavouritesBi
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import ApprovedPremium from "../Pages/Dashboard/Admin/ApprovedPremium/ApprovedPremium";
 import ApprovedContactRequest from "../Pages/Dashboard/Admin/ApprovedContactRequest/ApprovedContactRequest";
+import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
       {
         path: "approved-contact-request",
         element: <ApprovedContactRequest></ApprovedContactRequest>,
+      },
+      {
+        path: "checkout/:biodataId",
+        element: <Payment></Payment>
       },
     ],
   },

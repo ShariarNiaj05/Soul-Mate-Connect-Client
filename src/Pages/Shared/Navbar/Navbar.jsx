@@ -43,7 +43,7 @@ function Navbar(props) {
   if (isLoading || loading) {
   return <p>loading..............</p>
 }
-console.log(userRole);
+// console.log(userRole);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);

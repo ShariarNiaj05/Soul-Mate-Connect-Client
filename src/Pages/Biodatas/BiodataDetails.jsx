@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import useBiodata from "../../Hooks/useBiodata";
 import useAuth from "../../Hooks/useAuth";
@@ -11,6 +11,16 @@ const BiodataDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const { user } = useAuth();
+
+  const { data: userRole, isLoading: userRoleLoading } = useQuery({
+    enabled: !!user?.email,
+    queryKey: ["user-role", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/${user?.email}`);
+
+      return res?.data?.role;
+    },
+  });
 
   // details biodata
   const { data: biodataDetails = {}, isLoading: biodataDetailsLoading } =
@@ -38,26 +48,24 @@ const BiodataDetails = () => {
       permanentAddress: biodataDetails.permanentDivision,
       PersonOccupation: biodataDetails.occupation,
     };
-    console.log(favouritesBiodataInfo);
 
-
-    const res = await axiosSecure.post('/favourites', favouritesBiodataInfo)
+    const res = await axiosSecure.post("/favourites", favouritesBiodataInfo);
     if (res.data.insertedId) {
       Swal.fire({
         position: "top-end",
         icon: "success",
         title: "Biodata added to favourites collection",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
     }
   };
 
-
-  if (biodataDetailsLoading) {
+  if (biodataDetailsLoading || userRoleLoading || isLoading) {
     return <p>loading...................</p>;
   }
-  // console.log(biodatas);
+  console.log(userRole);
+
   return (
     <div className=" flex flex-col lg:flex-row gap-5">
       <div className=" flex-1 p-3">
@@ -86,8 +94,26 @@ const BiodataDetails = () => {
             <p>expectedPartnerAge: {biodataDetails.expectedPartnerAge}</p>
             <p>expectedPartnerHeight: {biodataDetails.expectedPartnerHeight}</p>
             <p>expectedPartnerWeight: {biodataDetails.expectedPartnerWeight}</p>
-            <p>email: {biodataDetails.email}</p>
-            <p>mobileNumber: {biodataDetails.mobileNumber}</p>
+            <p>
+              email:
+              {userRole === "premium" ? (
+                biodataDetails.email
+              ) : (
+                <Link to={`/dashboard/checkout/${biodataDetails.biodataId}`}>
+                  <Button>Request Contact Information</Button>
+                </Link>
+              )}
+            </p>
+            <p>
+              mobileNumber:
+              {userRole === "premium" ? (
+                biodataDetails.mobileNumber
+              ) : (
+                <Link to={`/dashboard/checkout/${biodataDetails.biodataId}`}>
+                  <Button>Request Contact Information</Button>
+                </Link>
+              )}
+            </p>
             <div className="">
               <Button onClick={handleAddToFavourite} variant="contained">
                 Add to Favourites
