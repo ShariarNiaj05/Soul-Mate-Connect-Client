@@ -26,8 +26,8 @@ const GotMarried = () => {
   const handleSubmitSuccessStory = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const selfBiodataNumber = form.selfBiodataNumber.value;
-    const partnerBiodataNumber = form.partnerBiodataNumber.value;
+    const selfBiodataNumber = parseInt(form.selfBiodataNumber.value);
+    const partnerBiodataNumber = parseInt(form.partnerBiodataNumber.value);
     const coupleImageLink = form.coupleImageLink.value;
     const successStoryReview = form.successStoryReview.value;
     const starRating = form.starRating.value;
