@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Modal, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -15,6 +15,7 @@ const ViewBiodata = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [myBiodata, setMyBiodata] = useState({});
+  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
   useEffect(() => {
     setTimeout(async () => {
@@ -23,7 +24,7 @@ const ViewBiodata = () => {
     }, 500);
   }, [axiosSecure, user?.email]);
 
-  const handlePremium = () => {
+  /*  const handlePremium = () => {
     Swal.fire({
       title: "Are you sure?",
       text: "To proceed for premium member!",
@@ -49,7 +50,48 @@ const ViewBiodata = () => {
         }
       }
     });
+  }; */
+
+  // test MUI modal related functions
+  const handleOpenConfirmationModal = () => {
+    setConfirmationModalOpen(true);
   };
+
+  const handleCloseConfirmationModal = () => {
+    setConfirmationModalOpen(false);
+  };
+
+  const handleConfirmPremium = async () => {
+    console.log("clicked");
+    const updateResponse = await axiosSecure.patch(
+      `/biodatas/status/${myBiodata._id}`,
+      { biodataStatus: "requested for premium" }
+      );
+    console.log(updateResponse);
+    if (updateResponse.data.modifiedCount > 0) {
+      Swal.fire({
+        title: "Requested!",
+        text: "Request sent to the admin. Please wait for approval.",
+        icon: "success",
+      });
+      
+    }
+
+    handleCloseConfirmationModal();
+  };
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
   return (
     <Grid>
       <Typography align="center" variant="h3" color={"primary"}>
@@ -276,13 +318,55 @@ const ViewBiodata = () => {
           </div>
           {/* submit or update button  */}
           <div className=" flex justify-evenly mt-5">
-            <Button
+            {/* <Button
               onClick={handlePremium}
               variant="contained"
               color="secondary"
             >
               Make Biodata Premium
+            </Button> */}
+
+            {/* test MUI modal  */}
+            <Button
+              onClick={handleOpenConfirmationModal}
+              variant="contained"
+              color="secondary"
+            >
+              Make Biodata Premium
             </Button>
+            <Modal
+              open={confirmationModalOpen}
+              onClose={handleCloseConfirmationModal}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Are you sure you want to make your biodata premium?
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: 2,
+                  }}
+                >
+                  <Button
+                    variant="outlined"
+                    onClick={handleCloseConfirmationModal}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleConfirmPremium}
+                  >
+                    Yes, Make it Premium
+                  </Button>
+                </Box>
+              </Box>
+            </Modal>
           </div>
         </div>
       </div>
@@ -291,7 +375,3 @@ const ViewBiodata = () => {
 };
 
 export default ViewBiodata;
-
-ViewBiodata.propTypes = {
-  props: PropTypes.any,
-};
