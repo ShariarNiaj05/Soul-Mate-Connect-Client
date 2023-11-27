@@ -18,6 +18,9 @@ import ApprovedContactRequest from "../Pages/Dashboard/Admin/ApprovedContactRequ
 import Payment from "../Pages/Payment/Payment";
 import MyContactRequest from "../Pages/Dashboard/MyContactRequest/MyContactRequest";
 import AdminDashboard from "../Pages/Dashboard/Admin/AdminDashboard/AdminDashboard";
+import GotMarried from "../Pages/Dashboard/GotMarried/GotMarried";
+import SuccessStory from "../Pages/Dashboard/Admin/SuccessStory/AdminSuccessStory";
+import AdminSuccessStory from "../Pages/Dashboard/Admin/SuccessStory/AdminSuccessStory";
 
 const router = createBrowserRouter([
   {
@@ -89,6 +92,10 @@ const router = createBrowserRouter([
         element: <FavouritesBiodata></FavouritesBiodata>,
       },
       {
+        path: "got-married",
+        element: <GotMarried></GotMarried>
+      },
+      {
         path: "checkout/:biodataId",
         element: <Payment></Payment>
       },
@@ -109,6 +116,10 @@ const router = createBrowserRouter([
       {
         path: "approved-contact-request",
         element: <ApprovedContactRequest></ApprovedContactRequest>,
+      },
+      {
+        path: "success-story",
+        element: <AdminSuccessStory></AdminSuccessStory>
       },
       
     ],

@@ -33,7 +33,7 @@ const DashboardLayout = () => {
               {/* TODO :: role specify  */}
 
               {/* basic & premium user dashboard route  */}
-              {user && ( userRole === "basic" || userRole === "premium")  && (
+              {user && (userRole === "basic" || userRole === "premium") && (
                 <div>
                   <Button variant="contained">
                     <NavLink to={"/dashboard/edit-biodata"}>
@@ -83,6 +83,11 @@ const DashboardLayout = () => {
                   <Button variant="contained">
                     <NavLink to={"/dashboard/approved-contact-request"}>
                       Approved Contact Request
+                    </NavLink>
+                  </Button>
+                  <Button variant="contained">
+                    <NavLink to={"/dashboard/success-story"}>
+                      View Success Story
                     </NavLink>
                   </Button>
                 </div>

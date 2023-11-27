@@ -10,16 +10,18 @@ import "swiper/css/navigation";
 
 import { Navigation } from "swiper/modules";
 import { useEffect, useState } from "react";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const SuccessStory = () => {
   const [successStories, setSuccessStories] = useState([]);
+  const axiosPublic = useAxiosPublic();
   useEffect(() => {
-    fetch("successStory.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setSuccessStories(data);
-      });
-  }, []);
+    setTimeout(async () => {
+      const res = await axiosPublic.get("/success-story");
+      console.log(res);
+      setSuccessStories(res.data);
+    }, 500);
+  }, [axiosPublic]);
   console.log(successStories);
   return (
     <div>
@@ -32,13 +34,13 @@ const SuccessStory = () => {
         Success Story
       </Typography>
       <>
-        <Container>
+      <Container>
           <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
             {successStories.map((successStory) => (
               <SwiperSlide key={successStory._id}>
                 <div>
                   <Typography variant="h6" align="center">
-                    {successStory.marriageDate}
+                    {new Date(successStory.marriageDate).toLocaleDateString()}
                   </Typography>
                   <CardMedia
                     component="img"
