@@ -1,5 +1,6 @@
 import Banner from "../Banner/Banner";
 import HowWorks from "../HowWorks/HowWorks";
+import PremiumMemberProfiles from "../PremiumMemberProfiles/PremiumMemberProfiles";
 import SuccessCounter from "../SuccessCounter/SuccessCounter";
 import SuccessStory from "../SuccessStory/SuccessStory";
 
@@ -7,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <Banner></Banner>
-      {/* have to add premium member  */}
+      <PremiumMemberProfiles></PremiumMemberProfiles>
       <HowWorks></HowWorks>
       <SuccessCounter></SuccessCounter>
       <SuccessStory></SuccessStory>
