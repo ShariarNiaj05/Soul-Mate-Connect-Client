@@ -10,7 +10,7 @@ import useAuth from "../../Hooks/useAuth";
 
 const Biodatas = () => {
   const [biodatas, setBiodatas] = useState([]);
-  // const {user} = useAuth()
+  const [currentPage, setCurrentPage] = useState(0);
   const [filters, setFilters] = useState({
     minAge: "18",
     maxAge: "80",
@@ -37,17 +37,35 @@ const Biodatas = () => {
   };
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["filtered-biodatas", filters],
+    queryKey: ["filtered-biodatas", filters, currentPage],
     queryFn: async () => {
-      const res = await axiosPublic.get("/biodatas", { params: filters });
+      const res = await axiosPublic.get(`/biodatas?page=${currentPage}&size=${itemsPerPage}`, { params: filters });
       setBiodatas(res.data);
+      // refetch()
       return res.data;
     },
   });
 
-  if (isLoading) {
+  const { data: totalCount, isLoading: pageCountLoading } = useQuery({
+    queryKey: ["biodata-count"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/biodata-count");
+      return res.data.count;
+    },
+  });
+  
+
+  const itemsPerPage = 8;
+  const numberOfPages = Math.ceil(totalCount / itemsPerPage);
+
+
+  if (isLoading || pageCountLoading) {
     return <p>loading.......</p>;
   }
+  
+  const pages = [...Array(numberOfPages).keys()];
+
+  
   console.log(data);
 
   const formInputStyle =
@@ -55,6 +73,7 @@ const Biodatas = () => {
 
   const formLabelStyle =
     "before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-blue-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-blue-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-blue-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500";
+
   return (
     <div className=" flex mt-10 max-w-screen-2xl mx-auto flex-col lg:flex-row gap-5 grid-cols-12">
       <div className=" col-span-6">
@@ -147,6 +166,23 @@ const Biodatas = () => {
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+        <div className=" text-center my-5">
+          {/* pagination  */}
+          Pages:
+          {pages.map((page, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentPage(page)}
+              className={
+                currentPage === page
+                  ? " bg-lime-800 text-white px-2 mr-3 rounded"
+                  : " bg-white text-black px-2 mr-3 rounded"
+              }
+            >
+              {page + 1}
+            </button>
           ))}
         </div>
       </div>

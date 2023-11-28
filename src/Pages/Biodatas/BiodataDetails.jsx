@@ -64,7 +64,7 @@ const BiodataDetails = () => {
   if (biodataDetailsLoading || userRoleLoading || isLoading) {
     return <p>loading...................</p>;
   }
-  console.log(userRole);
+  console.log(userRole, biodatas);
 
   return (
     <div className=" flex flex-col lg:flex-row gap-5">
