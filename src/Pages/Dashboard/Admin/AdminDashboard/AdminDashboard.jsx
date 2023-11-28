@@ -22,7 +22,7 @@ const AdminDashboard = () => {
     },
   });
 
-  console.log(stats);
+  // console.log(stats);
 
   const statistics = [
     { name: "Total Biodata", value: stats?.totalBiodataCount },

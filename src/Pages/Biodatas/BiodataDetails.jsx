@@ -73,7 +73,7 @@ const BiodataDetails = () => {
         <div className="bg-base-100 shadow-xl">
           <figure className="px-10 pt-10">
             <img
-              src="https://cdn0.weddingwire.in/article/6998/3_2/1280/jpg/28996-matrimonial-services-dipak-studious-lead-image.webp"
+              src={biodataDetails?.profileImage}
               className="rounded-xl max-h-96 w-full object-contain"
             />
           </figure>

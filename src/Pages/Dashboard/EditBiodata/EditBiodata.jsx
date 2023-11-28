@@ -4,6 +4,7 @@ import useAuth from "../../../Hooks/useAuth";
 import Select from "react-select";
 import Swal from 'sweetalert2'
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 const formInputStyle =
   "peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border  placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50";
@@ -27,10 +28,8 @@ const permanentDivisionOption = [
 const occupationOption = [
   { value: "student", label: "Student" },
   { value: "job", label: "Job" },
-  { value: "rangpur", label: "Rangpur" },
   { value: "doctor", label: "Doctor" },
   { value: "teacher", label: "Teacher" },
-  { value: "rangpur", label: "Rangpur" },
   { value: "architect", label: "Architect" },
   { value: "lawyer", label: "Lawyer" },
   { value: "engineer", label: "Engineer" },
@@ -78,6 +77,7 @@ const Checkbox = ({ children, ...props }) => (
 const EditBiodata = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure()
+  const navigate = useNavigate()
 
 
   const handleSubmitBiodata =  async(e) => {
@@ -135,6 +135,7 @@ const EditBiodata = () => {
         showConfirmButton: false,
         timer: 1500
       });
+      navigate('/dashboard/view-biodata')
     }
     if (data.modifiedCount > 0) {
       Swal.fire({
@@ -144,6 +145,7 @@ const EditBiodata = () => {
         showConfirmButton: false,
         timer: 1500
       });
+      navigate('/dashboard/view-biodata')
     }
   };
   return (

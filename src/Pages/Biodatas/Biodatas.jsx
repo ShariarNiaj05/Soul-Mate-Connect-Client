@@ -6,10 +6,11 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Select from "react-select";
+import useAuth from "../../Hooks/useAuth";
 
 const Biodatas = () => {
   const [biodatas, setBiodatas] = useState([]);
-
+  // const {user} = useAuth()
   const [filters, setFilters] = useState({
     minAge: "18",
     maxAge: "80",
@@ -123,7 +124,6 @@ const Biodatas = () => {
                 <option value="sylhet">Sylhet</option>
               </select>
             </div>
-
           </form>
         </div>
       </div>
@@ -132,11 +132,7 @@ const Biodatas = () => {
           {biodatas.map((biodata) => (
             <div key={biodata._id} className="shadow-xl p-5 ">
               <figure>
-                <img
-                  src={
-                    "https://cdn0.weddingwire.in/article/6998/3_2/1280/jpg/28996-matrimonial-services-dipak-studious-lead-image.webp"
-                  }
-                />
+                <img src={biodata?.profileImage} />
               </figure>
               <div className="">
                 <h2 className="">Biodata Id: {biodata.biodataId}</h2>
