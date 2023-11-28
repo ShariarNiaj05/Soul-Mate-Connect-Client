@@ -5,13 +5,19 @@ import { Grid } from "@mui/material";
 
 const MainLayout = () => {
   return (
-    <div>
-      <Navbar></Navbar>
-      <Grid>
+    <>
+      <div className=" mb-5">
+        <Navbar></Navbar>
+      </div>
+      {/* <Grid>
+        
+      </Grid> */}
+
+      <div className="min-h-screen">
         <Outlet></Outlet>
-      </Grid>
+      </div>
       <Footer></Footer>
-    </div>
+    </>
   );
 };
 

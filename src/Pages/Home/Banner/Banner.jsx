@@ -8,15 +8,15 @@ import { Container, Grid } from "@mui/material";
 const Banner = () => {
   return (
     <Container sx={{ maxHeight: "800px" }}>
-      <Carousel >
+      <Carousel className=" text-center">
         <Grid sx={{ height: "600px" }}>
-          <img style={{ height: "100", maxWidth: "80%" }} src={image1} />
+          <img style={{ height: "100", maxWidth: "100%" }} src={image1} />
         </Grid>
         <Grid sx={{ height: "600px" }}>
-          <img style={{ height: "100%", maxWidth: "80%" }} src={image2} />
+          <img style={{ height: "100", maxWidth: "100%" }} src={image2} />
         </Grid>
         <Grid sx={{ height: "600px" }}>
-          <img style={{ height: "100", maxWidth: "80%" }} src={image3} />
+          <img style={{ height: "100", maxWidth: "100%" }} src={image3} />
         </Grid>
       </Carousel>
     </Container>

@@ -10,12 +10,13 @@ import { Grid } from "@mui/material";
 
 const card = (
   <Grid>
-    <Typography variant="h3" component="div" align="center">
+    <Typography align="center" variant="h3" color={"primary"}>
       How Our Websites Work
     </Typography>
+
     <Grid
       container
-      spacing={10}
+     
       maxWidth={"xl"}
       mx={"auto"}
       display="flex"
@@ -26,7 +27,7 @@ const card = (
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Exclusive Access to Advanced Filters
           </Typography>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="div" color={"primary"}>
             Precision Partner Search
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
@@ -47,7 +48,7 @@ const card = (
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Priority Listing and Visibility
           </Typography>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="div" color={"primary"}>
             Stand Out, Find Love
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
@@ -69,7 +70,7 @@ const card = (
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Enhanced Communication Privileges
           </Typography>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="div" color={"primary"}>
             Empowered Connections
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">

@@ -25,16 +25,12 @@ const SuccessStory = () => {
   console.log(successStories);
   return (
     <div>
-      <Typography
-        variant="h3"
-        component="div"
-        align="center"
-        sx={{ mt: "48px", mb: "48px" }}
-      >
+      <Typography align="center" variant="h3" color={"primary"}>
         Success Story
       </Typography>
+
       <>
-      <Container>
+        <Container>
           <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
             {successStories.map((successStory) => (
               <SwiperSlide key={successStory._id}>
@@ -45,7 +41,7 @@ const SuccessStory = () => {
                   <CardMedia
                     component="img"
                     height="400px"
-                    sx={{ objectFit: "contain" }}
+                    sx={{ objectFit: "contain", maxHeight: "250px" }}
                     image={successStory.coupleImage}
                     alt="Paella dish"
                   />
@@ -54,8 +50,12 @@ const SuccessStory = () => {
                   </Typography>
                   <Rating
                     style={{
-                      maxWidth: 180,
+                      maxWidth: 150,
                       textAlign: "center",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      justifySelf: "center",
                     }}
                     value={successStory.reviewStars}
                     readOnly

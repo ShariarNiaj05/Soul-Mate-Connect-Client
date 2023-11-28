@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Link, useParams } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import useBiodata from "../../Hooks/useBiodata";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
@@ -67,35 +67,42 @@ const BiodataDetails = () => {
   console.log(userRole, biodatas);
 
   return (
-    <div className=" flex flex-col lg:flex-row gap-5">
+    <div className=" flex flex-col lg:flex-row gap-5 p-3">
       <div className=" flex-1 p-3">
+      <Typography align='center' variant='h3' color={'primary'}>Details Information</Typography>
         {/* e biodata details information on the left side */}
         <div className="bg-base-100 shadow-xl">
-          <figure className="px-10 pt-10">
-            <img
-              src={biodataDetails?.profileImage}
-              className="rounded-xl max-h-96 w-full object-contain"
-            />
-          </figure>
+          <div className="flex gap-2 justify-center items-center mb-3">
+            <div>
+              <figure className="px-10 pt-10">
+                <img
+                  src={biodataDetails?.profileImage}
+                  className="rounded-xl max-h-96 w-full object-contain"
+                />
+              </figure>
+            </div>
+            <div>
+              <h2 className="">Name: {biodataDetails.name}</h2>
+              <p>Biodata Id: {biodataDetails.biodataId}</p>
+              <p>Biodata Type,: {biodataDetails.biodataType}</p>
+              <p>Permanent Division: {biodataDetails.permanentDivision}</p>
+              <p>Present Division: {biodataDetails.presentDivision}</p>
+              <p>Age: {biodataDetails.age}</p>
+              <p>Occupation: {biodataDetails.occupation}</p>
+              <p>Date Of Birth: {biodataDetails.dateOfBirth}</p>
+              <p>Height: {biodataDetails.height}</p>
+              <p>Weight: {biodataDetails.weight}</p>
+              <p>Race: {biodataDetails.race}</p>
+              <p>Fathers Name: {biodataDetails.fathersName}</p>
+              <p>Mothers Name: {biodataDetails.mothersName}</p>
+            </div>
+          </div>
           <div className="items-center text-center">
-            <h2 className="">Name: {biodataDetails.name}</h2>
-            <p>biodataId: {biodataDetails.biodataId}</p>
-            <p>biodataType,: {biodataDetails.biodataType}</p>
-            <p>permanentDivision: {biodataDetails.permanentDivision}</p>
-            <p>presentDivision: {biodataDetails.presentDivision}</p>
-            <p>age: {biodataDetails.age}</p>
-            <p>occupation: {biodataDetails.occupation}</p>
-            <p>dateOfBirth: {biodataDetails.dateOfBirth}</p>
-            <p>height: {biodataDetails.height}</p>
-            <p>weight: {biodataDetails.weight}</p>
-            <p>race: {biodataDetails.race}</p>
-            <p>fathersName: {biodataDetails.fathersName}</p>
-            <p>mothersName: {biodataDetails.mothersName}</p>
-            <p>expectedPartnerAge: {biodataDetails.expectedPartnerAge}</p>
-            <p>expectedPartnerHeight: {biodataDetails.expectedPartnerHeight}</p>
-            <p>expectedPartnerWeight: {biodataDetails.expectedPartnerWeight}</p>
+            <p>Expected Partner Age: {biodataDetails.expectedPartnerAge}</p>
+            <p>Expected Partner Height: {biodataDetails.expectedPartnerHeight}</p>
+            <p>Expected Partner Weight: {biodataDetails.expectedPartnerWeight}</p>
             <p>
-              email:
+              Email:
               {userRole === "premium" ? (
                 biodataDetails.email
               ) : (
@@ -105,7 +112,7 @@ const BiodataDetails = () => {
               )}
             </p>
             <p>
-              mobileNumber:
+              Mobile Number:
               {userRole === "premium" ? (
                 biodataDetails.mobileNumber
               ) : (
@@ -126,23 +133,28 @@ const BiodataDetails = () => {
         {/* Show the similar biodata based on user gender .When the
 details biodata gender is male then show the male biodata .
  */}
-        <div className=" grid grid-cols-2 gap-5">
+        <div className=" grid grid-cols-2 gap-5 p-3">
           {similarBiodata.map((singleSimilarBiodata) => (
             <div
               key={singleSimilarBiodata._id}
-              className="w-96 bg-base-100 shadow-xl"
+              className=" bg-base-100 shadow-xl flex gap-3 justify-center items-center"
             >
-              <figure>
-                <img src={singleSimilarBiodata.profileImage} />
-              </figure>
+              <div>
+                <figure>
+                  <img
+                    src={singleSimilarBiodata.profileImage}
+                    className=" max-h-48"
+                  />
+                </figure>
+              </div>
               <div className="">
                 <h2 className="">
                   Biodata Id: {singleSimilarBiodata.biodataId}
                 </h2>
-                <p>occupation: {singleSimilarBiodata.occupation}</p>
-                <p>age: {singleSimilarBiodata.age}</p>
-                <p>dateOfBirth: {singleSimilarBiodata.dateOfBirth}</p>
-                <p>height: {singleSimilarBiodata.height}</p>
+                <p>Occupation: {singleSimilarBiodata.occupation}</p>
+                <p>Age: {singleSimilarBiodata.age}</p>
+                <p>Date Of Birth: {singleSimilarBiodata.dateOfBirth}</p>
+                <p>Height: {singleSimilarBiodata.height}</p>
               </div>
             </div>
           ))}
