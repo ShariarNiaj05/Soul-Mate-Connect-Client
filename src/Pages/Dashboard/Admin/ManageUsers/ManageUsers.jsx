@@ -10,9 +10,7 @@ const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const [searchTerm, setSearchTerm] = useState("");
 
-    const [biodatas, , refetch] = useBiodata()
-    
-    
+  const [biodatas, , refetch] = useBiodata();
 
   const { data: allUsers, isLoading } = useQuery({
     queryKey: ["user-role"],
@@ -52,9 +50,10 @@ const ManageUsers = () => {
       });
     }
   };
-    const handleMakePremium = async (id) => {
-      
-        const res = await axiosSecure.patch(`/users/${id}`, { userRole: "premium" });
+  const handleMakePremium = async (id) => {
+    const res = await axiosSecure.patch(`/users/${id}`, {
+      userRole: "premium",
+    });
     console.log(res.data.updatedUserRole);
     if (res.data.updatedUserRole.modifiedCount > 0) {
       Swal.fire({
@@ -71,7 +70,7 @@ const ManageUsers = () => {
     return <p>loading........</p>;
   }
   return (
-    <table>
+    <table className=" table w-full">
       <Typography align="center" variant="h3" color={"primary"}>
         Manage Users
       </Typography>
@@ -82,22 +81,21 @@ const ManageUsers = () => {
         placeholder="search by name"
         className=" border-2 p-3 border-x-lime-600"
       />
-      <thead className=" flex justify-center mt-10">
-        <tr className=" flex justify-between gap-5 text-center">
+      <thead className=" flex  mt-10 border  border-slate-600">
+        <tr className=" flex fle justify-evenly gap-5  bg-lime-100 w-full">
           <th>Name</th>
           <th>Email</th>
           <th>Admin Action</th>
           <th>Make Premium Action</th>
         </tr>
       </thead>
-      <tbody className=" flex flex-col items-center justify-center mt-5">
-       
+      <tbody className=" flex flex-col  mt-5 " >
         {users?.map((user) => (
           <tr
             key={user._id}
-            className=" flex justify-between gap-5 text-center mb-10"
+            className=" flex items-center justify-evenly gap-5  mb-10 w-full "
           >
-            <td>{user.name}</td>
+            <td className="">{user.name}</td>
             <td>{user.email}</td>
 
             <Button
@@ -108,7 +106,7 @@ const ManageUsers = () => {
               Make Admin
             </Button>
             <Button
-              onClick={ () => handleMakePremium (user?._id)}
+              onClick={() => handleMakePremium(user?._id)}
               variant="contained"
               color="secondary"
             >

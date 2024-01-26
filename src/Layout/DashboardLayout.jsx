@@ -30,7 +30,7 @@ const DashboardLayout = () => {
         <div className=" w-64 min-h-screen bg-slate-300">
           <div className=" min-h-screen p-5 flex flex-col justify-between">
             <div>
-              {/* TODO :: role specify  */}
+              {/* Done :: role specify  */}
 
               {/* basic & premium user dashboard route  */}
               {user && (userRole === "basic" || userRole === "premium") && (
@@ -61,7 +61,7 @@ const DashboardLayout = () => {
                 </div>
               )}
 
-              {/* TODO :: role specify  */}
+              {/* Done :: role specify  */}
               {/* Admin  dashboard route  */}
               {user && userRole === "admin" && (
                 <div>

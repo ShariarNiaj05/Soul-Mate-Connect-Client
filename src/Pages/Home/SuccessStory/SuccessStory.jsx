@@ -25,7 +25,7 @@ const SuccessStory = () => {
   console.log(successStories);
   return (
     <div>
-      <Typography align="center" variant="h3" color={"primary"}>
+      <Typography align="center" variant="h3" color={"primary"} mt={10}>
         Success Story
       </Typography>
 
@@ -45,7 +45,7 @@ const SuccessStory = () => {
                     image={successStory.coupleImage}
                     alt="Paella dish"
                   />
-                  <Typography sx={{ mb: 1.5, p: "60px" }}>
+                  <Typography sx={{ mb: 1.5, p: "60px", textAlign: 'center' }}>
                     {successStory.successStoryText}
                   </Typography>
                   <Rating
@@ -57,6 +57,7 @@ const SuccessStory = () => {
                       justifyContent: "center",
                       justifySelf: "center",
                     }}
+                    className="mx-auto mb-10"
                     value={successStory.reviewStars}
                     readOnly
                   />
